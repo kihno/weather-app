@@ -6,7 +6,7 @@ const weather = (() => {
 
     button.addEventListener('click', getWeather);
 
-    let weatherData = [];
+    let weatherData = {};
 
     async function getWeather() {
         let city = input.value;
@@ -14,16 +14,24 @@ const weather = (() => {
         data = await response.json();
         console.log(data);
 
-        weatherData.push(data.name, Math.round(data.main.temp), data.weather[0].main, Math.round(data.main.temp_min), Math.round(data.main.temp_max), Math.round(data.main.humidity));
+        weatherData.city = data.name;
+        weatherData.temp = Math.round(data.main.temp);
+        weatherData.condition = data.weather[0].main;
+        weatherData.low = Math.round(data.main.temp_min);
+        weatherData.high = Math.round(data.main.temp_max)
+        weatherData.humidity = Math.round(data.main.humidity);
+  
+        clear();
         renderWeather();
     }
 
     function createDiv(data, prop) {
         let div = document.createElement('div');
+        div.classList.add(prop);
 
         if (prop === 'temp') {
             div.textContent = `${data}\u00b0 F`;
-        } else if (prop === 'name' || prop === 'weather') {
+        } else if (prop === 'city' || prop === 'condition') {
             div.textContent = data;
         } else {
             div.textContent = `${prop}: ${data}`;
@@ -32,13 +40,19 @@ const weather = (() => {
         main.appendChild(div);
     }
 
+    function clear() {
+        input.value = '';
+
+        while (main.firstChild) {
+            main.removeChild(main.firstChild);
+        }
+    }
+
     function renderWeather() {
-        createDiv(weatherData[0], 'name');
-        createDiv(weatherData[1], 'temp');
-        createDiv(weatherData[2], 'weather');
-        createDiv(weatherData[3], 'Low');
-        createDiv(weatherData[4], 'High');
-        createDiv(weatherData[5], 'Humidity');
+        for (let prop in weatherData) {
+            let value = weatherData[prop];
+            createDiv(value, prop);
+        }
     }
 
 })();

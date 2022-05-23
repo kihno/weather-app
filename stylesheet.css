@@ -1,0 +1,82 @@
+body {
+    background: linear-gradient(180deg, rgba(33,158,159,1) 0%, rgba(171,131,45,1) 100%);
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: rgba(0,0,0,0.5);
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#logo>img {
+    width: 300px;
+}
+
+#search {
+    display: flex;
+    align-items: center;
+}
+
+#units {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.current-temp {
+    color: goldenrod;
+    font-size: 30px;
+}
+   
+input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 40px;
+	height: 30px;
+	background: grey;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+}
+
+label:after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+/* input:checked + label {
+	background: #bada55;
+} */
+
+input:checked + label:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
+
+.far::after {
+    content: " \2109";
+}
+
+.cel::after {
+    content: " \2103";
+}
+    

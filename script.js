@@ -8,8 +8,8 @@ const weather = (() => {
 
     let weatherData = {};
 
-    async function getWeather() {
-        let city = input.value;
+    async function getWeather(location) {
+        let city = location || input.value;
         const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=256f2fb92e7b31de1dd3240fad6d6f0e', {mode: 'cors'});
         data = await response.json();
         console.log(data);
@@ -30,10 +30,14 @@ const weather = (() => {
         div.classList.add(prop);
 
         if (prop === 'temp') {
-            div.textContent = `${data}\u00b0 F`;
+            div.classList.add('far');
+            div.textContent = data;
         } else if (prop === 'city' || prop === 'condition') {
             div.textContent = data;
+        } else if (prop === 'humidity') {
+            div.textContent = `${data} %`
         } else {
+            div.classList.add('far');
             div.textContent = `${prop}: ${data}`;
         }
 
@@ -55,4 +59,12 @@ const weather = (() => {
         }
     }
 
+    const slider = document.getElementById('slider');
+    slider.addEventListener('click', toggleUnits);
+
+    function toggleUnits() {
+
+    }
+
+    window.onload = getWeather('los angeles');
 })();

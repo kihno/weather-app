@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/stylesheet.css">
+    <script src="main.js" defer></script>
+    <title>TempCheck</title>
+</head>
+<body>
+
+    <header>
+        <div id="logo">
+            <img src="../images/tempcheck-white.png" alt="TempCheck">
+        </div>
+        <div id="search">
+            <input type="text" placeholder="Location" >
+            <button>Get Weather</button>
+        </div>
+        <div id="units">
+            <span class="unit current" id="far">&#8457;</span>
+            <input type="checkbox" id="slider">
+            <label for="slider">Toggle</label>
+            <span class="unit" id="cel">&#8451;</span>
+        </div>
+    </header>
+
+    <div id="main"></div>
+
+    <div id="forecast"></div>
+    
+</body>
+</html>

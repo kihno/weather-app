@@ -21,19 +21,24 @@ export const weather = (() => {
     async function getWeather(location) {
         let city = input.value || location;
         
-        let response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=256f2fb92e7b31de1dd3240fad6d6f0e', {mode: 'cors'});
-        let data = await response.json();
+        try {
+            let response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=256f2fb92e7b31de1dd3240fad6d6f0e', {mode: 'cors'});
+            let data = await response.json();
 
-        
-        weatherData.city = data.name;
-        weatherData.temp = Math.round(data.main.temp);
-        weatherData.condition = data.weather[0].main;
-        weatherData.low = Math.round(data.main.temp_min);
-        weatherData.high = Math.round(data.main.temp_max)
-        weatherData.humidity = Math.round(data.main.humidity);
-        console.log(weatherData);
-        clear();
-        renderWeather();
+            
+            weatherData.city = data.name;
+            weatherData.temp = Math.round(data.main.temp);
+            weatherData.condition = data.weather[0].main;
+            weatherData.low = Math.round(data.main.temp_min);
+            weatherData.high = Math.round(data.main.temp_max)
+            weatherData.humidity = Math.round(data.main.humidity);
+            console.log(weatherData);
+            clear();
+            renderWeather();
+        } catch(error) {
+            clear();
+            renderError();
+        }
     }
 
     function createDiv(data, prop) {
@@ -66,7 +71,7 @@ export const weather = (() => {
 
     function appendIcon(data) {
         const icon = new Image();
-        
+
         if (data === 'Clear') {
             icon.src = Clear;
             return icon;
@@ -99,6 +104,26 @@ export const weather = (() => {
             let value = weatherData[prop];
             createDiv(value, prop);
         }
+    }
+
+    function renderError() {
+        const img = document.createElement('img');
+
+        async function generateVoid() {
+            let url = 'https://api.giphy.com/v1/gifs/translate?api_key=slDqQ2cL7ZADYT3tCrAM7VBef2YfRFvY&s=void';
+            const response = await fetch(url, {mode: 'cors'});
+            const image = await response.json();
+            img.src = image.data.images.original.url;
+            img.id = 'void';
+        }
+
+        generateVoid();
+        main.appendChild(img);
+
+        let div = document.createElement('div');
+        div.id = 'error';
+        div.textContent = "You have left the bounds of space and time. Please enter a valid city name.";
+        main.appendChild(div);
     }
 
     return {getWeather}

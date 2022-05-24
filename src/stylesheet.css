@@ -4,10 +4,15 @@ body {
     width: 100vw;
     padding: 0;
     margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
 }
 
 header {
     background-color: rgba(0,0,0,0.5);
+	width: 100%;
     height: 20%;
     display: flex;
     justify-content: space-between;
@@ -56,6 +61,19 @@ header {
     align-items: center;
     justify-content: center;
     color: white;
+	width: 110px;
+	padding: 10px;
+}
+
+.unit {
+	cursor: pointer;
+	width: 30px;
+	margin-left: 4px;
+}
+
+#far {
+	display: flex;
+	justify-content: flex-end;
 }
 
 .current {
@@ -97,6 +115,47 @@ input:checked + label:after {
 	transform: translateX(-100%);
 }
 
+.far::after {
+    content: " \2109";
+}
+
+.cel::after {
+    content: " \2103";
+}
+
+#main {
+	display: grid;
+	justify-items: center;
+	gap: 2px;
+	color: white;
+	border: 4px solid white;
+	border-radius: 30px;
+	width: 300px;
+	padding: 20px;
+}
+#city, #condition {
+	font-size: 20px;
+}
+
+#temp {
+	font-size: 80px;
+}
+
+#condition {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#condition>div {
+	margin: 5px;
+}
+
+#condition>img {
+	width: 200px;
+	height: 200px;
+}
+
 #low::before {
 	content: 'Low: ';
 }
@@ -112,19 +171,3 @@ input:checked + label:after {
 #humidity::after {
 	content: '%';
 }
-
-.far::after {
-    content: " \2109";
-}
-
-.cel::after {
-    content: " \2103";
-}
-
-#main {
-	display: grid;
-	justify-content: center;
-	color: white;
-	border: 4px solid white;
-}
-    

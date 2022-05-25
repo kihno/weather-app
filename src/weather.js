@@ -13,6 +13,8 @@ export const weather = (() => {
     const input = document.querySelector('input');
     const button = document.querySelector('button');
     const main = document.getElementById('main');
+    const farElements = document.querySelectorAll('.far');
+    const temp = document.getElementById('temp');
 
     button.addEventListener('click', getWeather);
 
@@ -22,9 +24,15 @@ export const weather = (() => {
         let city = input.value || location;
         
         try {
-            let response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=256f2fb92e7b31de1dd3240fad6d6f0e', {mode: 'cors'});
-            let data = await response.json();
+            let data;
 
+            if (slider.farSpan.classList.contains('current')) {
+                let response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=256f2fb92e7b31de1dd3240fad6d6f0e', {mode: 'cors'});
+                data = await response.json();
+            } else {
+                let response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=256f2fb92e7b31de1dd3240fad6d6f0e', {mode: 'cors'});
+                data = await response.json();
+            }
             
             weatherData.city = data.name;
             weatherData.temp = Math.round(data.main.temp);
@@ -32,10 +40,12 @@ export const weather = (() => {
             weatherData.low = Math.round(data.main.temp_min);
             weatherData.high = Math.round(data.main.temp_max)
             weatherData.humidity = Math.round(data.main.humidity);
-            console.log(weatherData);
+
+            // slider.resetSlider();
             clear();
             renderWeather();
         } catch(error) {
+            console.log(error);
             clear();
             renderError();
         }
@@ -48,9 +58,12 @@ export const weather = (() => {
         if (prop === 'temp' || prop === 'low' || prop === 'high') {
             div.classList.add('far');
             div.textContent = data;
+
+            if (slider.celSpan.classList.contains('current')){
+                div.classList.add('cel');
+            }
         } else if (prop === 'condition') {
             div.appendChild(appendIcon(data));
-            console.log(appendIcon(data));
             let subDiv = document.createElement('div');
             subDiv.textContent = data;
             div.appendChild(subDiv);

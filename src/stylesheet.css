@@ -127,8 +127,18 @@ input:checked + label:after {
 	transform: translateX(-100%);
 }
 
+.far {
+	display: flex;
+}
+
 .far::after {
     content: " \2109";
+	font-size: 50%;
+	padding-top: 5%;
+}
+
+#temp::after {
+	padding-top: 10%;
 }
 
 .cel::after {
@@ -174,15 +184,18 @@ input:checked + label:after {
 }
 
 #low::before {
-	content: 'Low: ';
+	content: 'Low:';
+	padding-right: 5px;
 }
 
 #high::before {
-	content: 'High: ';
+	content: 'High:';
+	padding-right: 5px;
 }
 
 #humidity::before {
-	content: 'Humidity: ';
+	content: 'Humidity:';
+	padding-right: 5px;
 }
 
 #humidity::after {

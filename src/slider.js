@@ -35,7 +35,9 @@ export const slider = (() =>{
     }
 
     function setUnits(e) {
-        if(e.target.classList.contains('current')) {
+        let selection = e.target || farSpan;
+
+        if(selection.classList.contains('current')) {
             return;
         } else {
             unitElements.forEach(el => {
@@ -49,7 +51,8 @@ export const slider = (() =>{
             }
 
             e.target.classList.add('current');
-            toggleUnits();        }
+            toggleUnits();        
+        }
     }
 
     function convertTemp(farElements) {
@@ -70,4 +73,18 @@ export const slider = (() =>{
         });
 
     }
+
+    function resetSlider() {
+
+        if (farSpan.classList.contains('current')) {
+            return;
+        } else {
+            celSpan.classList.remove('current');
+            farSpan.classList.add('current');
+            slider.checked = false;
+        }
+    }
+
+    return {farSpan, celSpan, resetSlider}
+    
 })();

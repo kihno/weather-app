@@ -13,8 +13,6 @@ export const weather = (() => {
     const input = document.querySelector('input');
     const button = document.querySelector('button');
     const main = document.getElementById('main');
-    const farElements = document.querySelectorAll('.far');
-    const temp = document.getElementById('temp');
 
     button.addEventListener('click', getWeather);
 
@@ -41,7 +39,6 @@ export const weather = (() => {
             weatherData.high = Math.round(data.main.temp_max)
             weatherData.humidity = Math.round(data.main.humidity);
 
-            // slider.resetSlider();
             clear();
             renderWeather();
         } catch(error) {

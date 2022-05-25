@@ -1,5 +1,4 @@
 const path = require('path');
-const { argv } = require('process');
 
 module.exports = {
   entry: './src/index.js',
@@ -7,7 +6,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: argv.mode === 'production' ? '/weather-app' : '/',
   },
   module: {
     rules: [

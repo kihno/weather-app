@@ -22,6 +22,7 @@ header {
 #logo {
 	display: flex;
 	align-items: center;
+	src: url(../images/tempcheck-white.png);
 }
 
 #logo>img {

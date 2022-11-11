@@ -12,7 +12,7 @@ export const weather = (() => {
 
     const input = document.querySelector('input');
     const button = document.querySelector('button');
-    const main = document.getElementById('main');
+    const weather = document.getElementById('weather');
 
     button.addEventListener('click', getWeather);
 
@@ -68,14 +68,14 @@ export const weather = (() => {
             div.textContent = data;
         }
 
-        main.appendChild(div);
+        weather.appendChild(div);
     }
 
     function clear() {
         input.value = '';
 
-        while (main.firstChild) {
-            main.removeChild(main.firstChild);
+        while (weather.firstChild) {
+            weather.removeChild(weather.firstChild);
         }
     }
 
@@ -128,12 +128,12 @@ export const weather = (() => {
         }
 
         generateVoid();
-        main.appendChild(img);
+        weather.appendChild(img);
 
         let div = document.createElement('div');
         div.id = 'error';
         div.textContent = "You have left the bounds of space and time. Please enter a valid city name.";
-        main.appendChild(div);
+        weather.appendChild(div);
     }
 
     return {getWeather}

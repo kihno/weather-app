@@ -1,7 +1,19 @@
 body {
-    background: linear-gradient(180deg, rgba(33,158,159,1) 0%, rgba(171,131,45,1) 100%);
-    height: 100vh;
+	background-image: linear-gradient(
+		180deg,
+		hsl(240deg 100% 20%) 0%,
+		hsl(289deg 100% 21%) 11%,
+		hsl(315deg 100% 27%) 22%,
+		hsl(329deg 100% 36%) 33%,
+		hsl(337deg 100% 43%) 44%,
+		hsl(357deg 91% 59%) 56%,
+		hsl(17deg 100% 59%) 67%,
+		hsl(34deg 100% 53%) 78%,
+		hsl(45deg 100% 50%) 89%,
+		hsl(55deg 100% 50%) 100%
+	  );
     width: 100vw;
+	height: 100vh;
     padding: 0;
     margin: 0;
 	display: flex;
@@ -13,7 +25,6 @@ body {
 header {
     background-color: rgba(0,0,0,0.5);
 	width: 100%;
-    height: 20%;
     display: grid;
 	grid: 1fr / 1fr 2fr 1fr;
 	padding: 10px;
@@ -147,6 +158,10 @@ input:checked + label:after {
 }
 
 #main {
+	flex-grow: 1;
+}
+
+#weather {
 	display: grid;
 	justify-items: center;
 	gap: 2px;
@@ -204,8 +219,31 @@ input:checked + label:after {
 }
 
 #footer {
-	color: white;
 	text-align: center;
 	position: absolute;
 	bottom: 0;
+}
+
+@media screen and (max-width: 800px) {
+	body {
+		height: auto;
+	}
+
+	header {
+		grid: 2fr 1fr 1fr / 1fr;
+		justify-items: center;
+	}
+
+	#units {
+		justify-self: auto;
+	}
+
+	#search {
+		margin: 0;
+	}
+
+	#footer {
+		bottom: auto;
+		position: inherit;
+	}
 }
